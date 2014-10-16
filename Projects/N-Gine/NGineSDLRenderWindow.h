@@ -27,6 +27,7 @@ namespace NGine
 		int32 button;
 		int32 wheel;
 		mutable bool accepted;
+
 	};
 
 	struct KeyboardEvent
