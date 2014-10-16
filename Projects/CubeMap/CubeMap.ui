@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CubeMapClass</class>
+ <widget class="QMainWindow" name="CubeMapClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1073</width>
+    <height>867</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>CubeMap</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="ViewPort" name="viewPort" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>640</width>
+        <height>480</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Images</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="14" column="0">
+           <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Top level mip map size:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="selectedLabel2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>None Selected....</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="selectedLabel1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>None Selected....</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="selectedLabel3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>None Selected....</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QLabel" name="selectedLabel4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>None Selected....</string>
+            </property>
+           </widget>
+          </item>
+          <item row="13" column="0">
+           <widget class="QLabel" name="selectedLabel5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>None Selected....</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>Right (-X)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="13" column="1">
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="text">
+             <string>Back (-Z)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="1">
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>Front (+Z)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="text">
+             <string>Down (-Y)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="text">
+             <string>Up (+Y)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="14" column="1">
+           <widget class="QComboBox" name="comboBox">
+            <property name="currentIndex">
+             <number>9</number>
+            </property>
+            <property name="maxVisibleItems">
+             <number>12</number>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QComboBox::AdjustToContents</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>1x1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2x2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4x4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8x8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>16x16</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>32x32</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>64x64</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>128x128</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>256x256</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>512x512</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1024x1024</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2048x2048</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="selectedLabel0">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>None Selected....</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Left (+X)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Shader</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="7" column="1">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Sample Count:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QSlider" name="horizontalSlider_2">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="value">
+             <number>2000</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Microsurface:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QSlider" name="horizontalSlider">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="value">
+             <number>600</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="invertedAppearance">
+             <bool>false</bool>
+            </property>
+            <property name="invertedControls">
+             <bool>false</bool>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::NoTicks</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="pushButton_9">
+            <property name="text">
+             <string>Pick Color</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Fresnel:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QSlider" name="horizontalSlider_5">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="value">
+             <number>10000</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::NoTicks</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Reflectivity:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QComboBox" name="comboBox_2">
+            <item>
+             <property name="text">
+              <string>Original</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Filtered</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Shader:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QSlider" name="horizontalSlider_3">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="value">
+             <number>10000</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::NoTicks</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>Filter</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4"/>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Model</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_8">
+            <property name="text">
+             <string>Open Display Model (.obj)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="title">
+          <string>Export</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QPushButton" name="pushButton_7">
+            <property name="text">
+             <string>Export</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ViewPort</class>
+   <extends>QWidget</extends>
+   <header>ViewPort.h</header>
+   <container>1</container>
+   <slots>
+    <slot>choosePosX()</slot>
+    <slot>chooseNegX()</slot>
+    <slot>choosePosY()</slot>
+    <slot>chooseNegY()</slot>
+    <slot>choosePosZ()</slot>
+    <slot>chooseNegZ()</slot>
+    <slot>openDisplayModel()</slot>
+    <slot>texSizeChanged(QString)</slot>
+    <slot>updateMicrosurface(int)</slot>
+    <slot>updateReflectivity(int)</slot>
+    <slot>updateFresnel(int)</slot>
+    <slot>updateDisplayModelScale(int)</slot>
+    <slot>updateSampleCount(int)</slot>
+    <slot>chooseColor()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="CubeMap.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>openDisplayModel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1044</x>
+     <y>520</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>700</x>
+     <y>253</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>choosePosY()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>112</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>631</x>
+     <y>97</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>choosePosZ()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>607</x>
+     <y>160</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>choosePosX()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>573</x>
+     <y>35</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>chooseNegZ()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>561</x>
+     <y>191</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>chooseNegY()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>501</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>chooseNegX()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>605</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>viewPort</receiver>
+   <slot>updateMicrosurface(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1044</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>500</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>viewPort</receiver>
+   <slot>updateReflectivity(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1044</x>
+     <y>369</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>603</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_5</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>viewPort</receiver>
+   <slot>updateFresnel(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1044</x>
+     <y>397</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>viewPort</receiver>
+   <slot>updateSampleCount(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1044</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>568</x>
+     <y>420</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_9</sender>
+   <signal>clicked()</signal>
+   <receiver>viewPort</receiver>
+   <slot>chooseColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>929</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>718</x>
+     <y>275</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>viewPort</receiver>
+   <slot>texSizeChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>225</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>633</x>
+     <y>21</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

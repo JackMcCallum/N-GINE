@@ -1,0 +1,15 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>test-icon.png</file>
+	
+    <file>icon_cube_red.png</file>
+    <file>icon_cube_green.png</file>
+    <file>icon_cube_blue.png</file>
+    <file>icon_cube_purple.png</file>
+	
+	<file>icon_error.png</file>
+	<file>icon_warning.png</file>
+	<file>icon_message.png</file>
+	
+</qresource>
+</RCC>

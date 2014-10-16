@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NGineCommandQueue.h" />
+    <ClInclude Include="NGineFixedSizeAllocator.h" />
+    <ClInclude Include="NGineImageFile.h" />
+    <ClInclude Include="NGineLight.h" />
+    <ClInclude Include="NGineDeferredRenderTarget.h" />
+    <ClInclude Include="NGineAABB.h" />
+    <ClInclude Include="NGineComponent.h" />
+    <ClInclude Include="NGineDirectory.h" />
+    <ClInclude Include="NGineGizmos.h" />
+    <ClInclude Include="NGineGLBuffer.h" />
+    <ClInclude Include="NGineCamera.h" />
+    <ClInclude Include="NGineCommon.h" />
+    <ClInclude Include="NGineConditional.h" />
+    <ClInclude Include="NGineFrameAllocator.h" />
+    <ClInclude Include="NGineGLFrameBuffer.h" />
+    <ClInclude Include="NGineGLTexture.h" />
+    <ClInclude Include="NGineGLTexture2D.h" />
+    <ClInclude Include="NGineGLTextureCube.h" />
+    <ClInclude Include="NGineGLShader.h" />
+    <ClInclude Include="NGineLog.h" />
+    <ClInclude Include="NGineMain.h" />
+    <ClInclude Include="NGineGLMesh.h" />
+    <ClInclude Include="NGineMaterial.h" />
+    <ClInclude Include="NGineMemoryBlock.h" />
+    <ClInclude Include="NGineMesh.h" />
+    <ClInclude Include="NGineMeshFile.h" />
+    <ClInclude Include="NGineObjFile.h" />
+    <ClInclude Include="NGineRenderCommand.h" />
+    <ClInclude Include="NGineRenderSystem.h" />
+    <ClInclude Include="NGineRenderTarget.h" />
+    <ClInclude Include="NGineRenderThread.h" />
+    <ClInclude Include="NGineRenderWindow.h" />
+    <ClInclude Include="NGineResource.h" />
+    <ClInclude Include="NGineResourceManager.h" />
+    <ClInclude Include="NGineSceneNode.h" />
+    <ClInclude Include="NGineSDLRenderWindow.h" />
+    <ClInclude Include="NGineShader.h" />
+    <ClInclude Include="NGineShaderFile.h" />
+    <ClInclude Include="NGineStable.h" />
+    <ClInclude Include="NGineTexture.h" />
+    <ClInclude Include="NGineUtilities.h" />
+    <ClInclude Include="NGineXInputPoller.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NGineCommandQueue.cpp" />
+    <ClCompile Include="NGineImageFile.cpp" />
+    <ClCompile Include="NGineLight.cpp" />
+    <ClCompile Include="NGineDeferredRenderTarget.cpp" />
+    <ClCompile Include="NGineAABB.cpp" />
+    <ClCompile Include="NGineComponent.cpp" />
+    <ClCompile Include="NGineDirectory.cpp" />
+    <ClCompile Include="NGineGizmos.cpp" />
+    <ClCompile Include="NGineGLBuffer.cpp" />
+    <ClCompile Include="NGineCamera.cpp" />
+    <ClCompile Include="NGineGLFrameBuffer.cpp" />
+    <ClCompile Include="NGineGLTexture.cpp" />
+    <ClCompile Include="NGineGLTextureCube.cpp" />
+    <ClCompile Include="NGineGLShader.cpp" />
+    <ClCompile Include="NGineGLTexture2D.cpp" />
+    <ClCompile Include="NGineLog.cpp" />
+    <ClCompile Include="NGineMain.cpp" />
+    <ClCompile Include="NGineGLMesh.cpp" />
+    <ClCompile Include="NGineMaterial.cpp" />
+    <ClCompile Include="NGineMemoryBlock.cpp" />
+    <ClCompile Include="NGineMesh.cpp" />
+    <ClCompile Include="NGineMeshFile.cpp" />
+    <ClCompile Include="NGineObjFile.cpp" />
+    <ClCompile Include="NGineRenderSystem.cpp" />
+    <ClCompile Include="NGineRenderTarget.cpp" />
+    <ClCompile Include="NGineRenderThread.cpp" />
+    <ClCompile Include="NGineRenderWindow.cpp" />
+    <ClCompile Include="NGineResource.cpp" />
+    <ClCompile Include="NGineResourceManager.cpp" />
+    <ClCompile Include="NGineSceneNode.cpp" />
+    <ClCompile Include="NGineSDLRenderWindow.cpp" />
+    <ClCompile Include="NGineShader.cpp" />
+    <ClCompile Include="NGineShaderFile.cpp" />
+    <ClCompile Include="NGineStable.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="NGineTexture.cpp" />
+    <ClCompile Include="NGineUtilities.cpp" />
+    <ClCompile Include="NGineXInputPoller.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{56EFC18E-99A3-4838-A1AF-CC33B4D36E3B}</ProjectGuid>
+    <RootNamespace>NGine</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_$(PlatformTarget)_$(Configuration)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)_$(PlatformTarget)_$(Configuration)</TargetName>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_$(PlatformTarget)_$(Configuration)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>$(ProjectName)_$(PlatformTarget)_$(Configuration)</TargetName>
+    <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../ThirdParty/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NGINE_EXPORT;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/Zm140 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>NGineStable.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)../Lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glew.lib;sdl2.lib;FreeImage.lib;Profiler.lib;XInput.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+    </Lib>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).dll" "$(SolutionDir)..\Build\$(PlatformTarget)\$(TargetName)d.dll"
+copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).lib" "$(SolutionDir)..\Lib\$(TargetName).lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../ThirdParty/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NGINE_EXPORT;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/Zm140 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>NGineStable.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)../Lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glew.lib;sdl2.lib;FreeImage.lib;;XInput.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).dll" "$(SolutionDir)..\Build\$(PlatformTarget)\$(TargetName)d.dll"
+copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).lib" "$(SolutionDir)..\Lib\$(TargetName).lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../ThirdParty/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>NGineStable.h</PrecompiledHeaderFile>
+      <AdditionalOptions>/Zm140 %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)../Lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glew.lib;sdl2.lib;FreeImage.lib;Profiler.lib;XInput.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).dll" "$(SolutionDir)..\Build\$(PlatformTarget)\$(TargetName).dll"
+copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).lib" "$(SolutionDir)..\Lib\$(TargetName).lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../ThirdParty/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>NGineStable.h</PrecompiledHeaderFile>
+      <AdditionalOptions>/Zm140 %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)../Lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glew.lib;sdl2.lib;FreeImage.lib;;XInput.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\ThirdParty\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+    </Lib>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).dll" "$(SolutionDir)..\Build\$(PlatformTarget)\$(TargetName).dll"
+copy /Y "$(SolutionDir)Temp\$(ProjectName)\$(PlatformTarget)\$(Configuration)\$(TargetName).lib" "$(SolutionDir)..\Lib\$(TargetName).lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

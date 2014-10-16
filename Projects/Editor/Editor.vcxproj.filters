@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Backend">
+      <UniqueIdentifier>{952b2369-df9e-4bec-9338-f2dc2114bc4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Backend\Qt Files">
+      <UniqueIdentifier>{dff93cd9-e88e-4d57-aa9a-02795c5b525b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Backend\Qt Files\Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Backend\Qt Files\Generated Files\Debug">
+      <UniqueIdentifier>{abc17089-cb6d-44bb-b9d6-3abbe99293ed}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Backend\Qt Files\Generated Files\Release">
+      <UniqueIdentifier>{4736b426-e834-49da-b351-9a73e7e83d99}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Backend\Qt Files\Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp" />
+    <ClCompile Include="Editor.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Viewport.cpp">
+      <Filter>Backend\Qt Files\Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Viewport.cpp">
+      <Filter>Backend\Qt Files\Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Editor.cpp">
+      <Filter>Backend\Qt Files\Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Editor.cpp">
+      <Filter>Backend\Qt Files\Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="GeneratedFiles\qrc_Resource.cpp">
+      <Filter>Backend\Qt Files\Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QtRenderWindow.cpp">
+      <Filter>Backend\Qt Files\Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QtRenderWindow.cpp">
+      <Filter>Backend\Qt Files\Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QtRenderWindow.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
+      <Filter>Backend\Qt Files\Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Editor.h">
+      <Filter>Backend</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Viewport.h" />
+    <CustomBuild Include="MainWindow.ui">
+      <Filter>Backend\Qt Files\Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\Resource.qrc">
+      <Filter>Backend\Qt Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QtRenderWindow.h">
+      <Filter>Backend</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

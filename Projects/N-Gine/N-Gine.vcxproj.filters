@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{0843e703-dbcd-4a56-8750-72b4e9a47eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files">
+      <UniqueIdentifier>{3f9cb361-a50a-4e9c-b935-4f7dc41654b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{3f6407a8-9c64-41c7-b854-8af120438842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{7e60b5b9-c7b6-4a89-89c3-2137a1ef4272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{ba0204bc-64b6-4221-a00c-1e61c8494b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\GL Interface">
+      <UniqueIdentifier>{425c068e-8929-44d2-a822-06f5b1d441de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\System">
+      <UniqueIdentifier>{84d01aad-fd9b-48f6-a886-0c410f5d4f37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{ba955a1a-115a-414f-8431-dcf5701c1d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{7706f3f5-4493-48d1-bbbe-7c8a36bdf1e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NGineFrameAllocator.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineCamera.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGLShader.h">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGLFrameBuffer.h">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineShaderFile.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineXInputPoller.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineSceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineComponent.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineAABB.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineObjFile.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineMeshFile.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGizmos.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineRenderCommand.h">
+      <Filter>Rendering\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineRenderSystem.h">
+      <Filter>Rendering\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineRenderWindow.h">
+      <Filter>Rendering\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineRenderThread.h">
+      <Filter>Rendering\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineSDLRenderWindow.h">
+      <Filter>Rendering\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineRenderTarget.h">
+      <Filter>Rendering\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineMaterial.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineMesh.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineShader.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineTexture.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineDirectory.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineResourceManager.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineDeferredRenderTarget.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineImageFile.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineLight.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineFixedSizeAllocator.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineMemoryBlock.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGLBuffer.h">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGLMesh.h">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGLTexture.h">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGLTexture2D.h">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineGLTextureCube.h">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineCommandQueue.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineUtilities.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineMain.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineLog.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineStable.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineCommon.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="NGineConditional.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NGineMemoryBlock.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineAABB.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineCamera.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineComponent.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGizmos.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineLight.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineSceneNode.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineMaterial.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineMesh.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineResourceManager.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineShader.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineTexture.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGLBuffer.cpp">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGLFrameBuffer.cpp">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGLMesh.cpp">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGLShader.cpp">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGLTexture.cpp">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGLTexture2D.cpp">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineGLTextureCube.cpp">
+      <Filter>Rendering\GL Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineRenderSystem.cpp">
+      <Filter>Rendering\System</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineRenderTarget.cpp">
+      <Filter>Rendering\System</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineRenderThread.cpp">
+      <Filter>Rendering\System</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineRenderWindow.cpp">
+      <Filter>Rendering\System</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineSDLRenderWindow.cpp">
+      <Filter>Rendering\System</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineDeferredRenderTarget.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineXInputPoller.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineDirectory.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineImageFile.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineMeshFile.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineObjFile.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineShaderFile.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineCommandQueue.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineUtilities.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineMain.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineLog.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="NGineStable.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

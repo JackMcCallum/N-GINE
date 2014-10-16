@@ -1,0 +1,40 @@
+# Blender MTL File: 'None'
+# Material Count: 4
+
+newmtl Material.001
+Ns 190.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.171225 0.171225 0.171225
+Ks 0.393939 0.393939 0.393939
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\Jack McCallum\\Desktop\\Storage\\Development\\Ships\\ShipHighPoly.blend\\Textures\\GreeblePack\\Layer1\\Greeble Base Layer 1 - Height (Normal Map).png
+
+newmtl Material.003
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.554283 0.459989
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.004
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.590909
+illum 2
+map_Kd C:\\Users\\Jack McCallum\\Desktop\\Storage\\Development\\Ships\\ShipHighPoly.blend\\Terrain Editor\\ProgramData\\Materials\\CubeMaps\\Skies\\OrangeSky\\OrangeBox_up.png
+
+newmtl Material.005
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.231774 0.352845 0.512000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
