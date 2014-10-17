@@ -39,12 +39,13 @@ void main()
 	
 	vec4 NDC = vec4(vTexCoord*2-1, texture(uTexUnit5, vTexCoord).r*2-1, 1);
 	vec4 projectedNDC = inverse(uProjViewMatrix) * NDC;
-	vec3 WorldPos = projectedNDC.xyz / projectedNDC.w;
+	vec3 worldPos = projectedNDC.xyz / projectedNDC.w;
+	
 	
 	
 	vec3 N = normalize(NormalSamp.xyz);
 	vec3 L = normalize(uCustomParams0.xyz);
-	vec3 E = normalize(uCameraMatrix[3].xyz - WorldPos);
+	vec3 E = normalize(uCameraMatrix[3].xyz - worldPos);
 	vec3 H = normalize(L + E);
 	
 	
@@ -56,7 +57,6 @@ void main()
 	float shade = Lighting_Diffuse(N, L, E, roughness);
 	//shade += pow(max(dot(N, H),0),32);
 	shade += shade * Lighting_Specular(N, L, H, E, metalness, roughness);
-	
 	
 	oColor0 = lightColor * AlbedoSamp * shade;
 	//oColor0 = vec4(pos.xyz*0.1 + 0.5, 1);

@@ -10,30 +10,22 @@ namespace NGine
 		Command* task = nullptr;
 		while (!mRequestReturn)
 		{
-			task = popCommand();
-			if (task)
-				task->executeAndDestroy();
+			std::unique_lock<std::mutex> mlock(mMutex);
+			while (mQueue.empty() && !mRequestReturn)
+				mConditional.wait(mlock);
+
+			if (mRequestReturn) return;
+
+			auto item = mQueue.front();
+			mQueue.pop();
+			if (item) item->executeAndDestroy();
 		}
 	}
 
 	void CommandQueue::requestReturn()
 	{
 		mRequestReturn = true;
-	}
-
-	Command* CommandQueue::popCommand()
-	{
-		mQueueMutex.lock();
-
-		Command* task = nullptr;
-		if (!mTaskQueue.empty())
-		{
-			task = mTaskQueue.front();
-			mTaskQueue.pop();
-		}
-
-		mQueueMutex.unlock();
-		return task;
+		mConditional.notify_all();
 	}
 
 	TFixedSizeAllocator<CommandQueue::SMALL_TASK>& CommandQueue::getSmallTaskAllocator()

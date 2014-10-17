@@ -13,7 +13,7 @@ namespace NGine
 	class MeshFile;
 	class MeshRenderer;
 
-	class Mesh final : public Resource
+	class Mesh final : public Resource, public TPoolAllocator<Mesh>
 	{
 		friend class ResourceManager;
 		friend class MeshRenderer;
@@ -40,7 +40,7 @@ namespace NGine
 
 	};
 
-	class MeshRenderer : public Renderable
+	class MeshRenderer final : public Renderable, public TPoolAllocator<MeshRenderer>
 	{
 	public:
 		MeshRenderer(const std::string& mesh);
@@ -65,6 +65,18 @@ namespace NGine
 		std::vector<DrawCallData> mDrawCallData;
 	};
 
+	class SphereRenderer final : public Renderable, public TPoolAllocator<SphereRenderer>
+	{
+	public:
+		SphereRenderer(MaterialPtr material);
+		SphereRenderer(const std::string& material);
+		virtual ~SphereRenderer();
+
+		virtual void _extractDrawCalls(std::vector<DrawCall>& cachedDrawCallList, const Camera& camera);
+
+	private:
+		MaterialPtr mMaterial;
+	};
 }
 
 #endif // !__NGINE_MESH_H_

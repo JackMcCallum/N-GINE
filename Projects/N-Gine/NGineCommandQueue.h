@@ -2,9 +2,9 @@
 #define __NGINE_COMMAND_QUEUE_H_
 
 #include <mutex>
-#include <queue>
 #include <condition_variable>
 #include "NGineCommon.h"
+#include <queue>
 #include "NGineFixedSizeAllocator.h"
 
 namespace NGine
@@ -36,10 +36,6 @@ namespace NGine
 		// Request the return of the infinite loop
 		void requestReturn();
 
-		// Take a task from the queue
-		// Ownership is lost
-		Command* popCommand();
-
 		// Push a task into the queue
 		template<class T>
 		void enqueueCommand(const T& task);
@@ -61,38 +57,40 @@ namespace NGine
 		static TFixedSizeAllocator<LARGE_TASK>& getLargeTaskAllocator();
 
 	private:
-		std::queue<Command*> mTaskQueue;
-		std::mutex mQueueMutex;
-
+		std::queue<Command*> mQueue;
+		std::mutex mMutex;
+		std::condition_variable mConditional;
+		
 		bool mRequestReturn;
 	};
 
 	template<class T>
 	void CommandQueue::enqueueCommand(const T& task)
 	{
-		mQueueMutex.lock();
+		std::unique_lock<std::mutex> mlock(mMutex);
 
 		if (sizeof(T) <= SMALL_TASK)
 		{
 			void* ptr = CommandQueue::getSmallTaskAllocator().allocate();
-			mTaskQueue.push(new (ptr)T(task));
+			mQueue.push(new (ptr)T(task));
 		}
 		else if (sizeof(T) <= MEDIUM_TASK)
 		{
 			void* ptr = CommandQueue::getMediumTaskAllocator().allocate();
-			mTaskQueue.push(new (ptr)T(task));
+			mQueue.push(new (ptr)T(task));
 		}
 		else if (sizeof(T) <= LARGE_TASK)
 		{
 			void* ptr = CommandQueue::getLargeTaskAllocator().allocate();
-			mTaskQueue.push(new (ptr)T(task));
+			mQueue.push(new (ptr)T(task));
 		}
 		else
 		{
-			mTaskQueue.push(new T(task));
+			mQueue.push(new T(task));
 		}
 
-		mQueueMutex.unlock();
+		mlock.unlock();
+		mConditional.notify_one();
 	}
 
 	template<class T>

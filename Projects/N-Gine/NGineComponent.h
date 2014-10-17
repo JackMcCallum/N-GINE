@@ -126,7 +126,6 @@ namespace NGine
 
 	};
 
-	
 }
 
 #endif // !__NGINE_ENTITY_H_

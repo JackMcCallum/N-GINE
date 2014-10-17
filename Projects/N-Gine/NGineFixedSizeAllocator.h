@@ -15,7 +15,7 @@ namespace NGine
 	to speed up the storage of thousands of commands 
 	*/
 
-	/*
+	
 	template<uint32 SIZE, uint32 RESERVE = 64>
 	class TFixedSizeAllocator
 	{
@@ -78,32 +78,9 @@ namespace NGine
 		uint32 mNumAllocated;
 		std::mutex mLock;
 	};
-	*/
-
-	// Use this allocator to find memory leaks
-	template<uint32 SIZE, uint32 RESERVE = 64>
-	class TFixedSizeAllocator
-	{
-	public:
-		~TFixedSizeAllocator()
-		{
-		}
-
-		void* allocate()
-		{
-			static_assert(RESERVE > 0, "Reserve cannot be 0");
-			return malloc(SIZE);
-		}
-
-		void free(void* ptr)
-		{
-			::free(ptr);
-		}
-	};
 	
-
 	template<class Type, uint32 RESERVE = 64>
-	class TPoolAllocator
+	class TFixedTypeAllocator
 	{
 	public:
 		Type* allocate()
@@ -121,6 +98,27 @@ namespace NGine
 		TFixedSizeAllocator<sizeof(Type), RESERVE> mAlloc;
 	};
 
+	template<class T>
+	class TPoolAllocator
+	{
+	public:
+		void* operator new(size_t size)
+		{
+			assert(size == sizeof(T));
+			return getAllocator().allocate();
+		}
+
+		void operator delete(void* ptr)
+		{
+			getAllocator().free((T*)ptr);
+		}
+
+		static TFixedTypeAllocator<T>& getAllocator()
+		{
+			static TFixedTypeAllocator<T> alloc;
+			return alloc;
+		}
+	};
 }
 
 #endif // !__NGINE_FIXED_SIZE_ALLOCATOR_H_

@@ -342,6 +342,58 @@ namespace NGine
 		}
 	}
 
+	SphereRenderer::SphereRenderer(MaterialPtr material) :
+		Renderable(&typeid(SphereRenderer)),
+		mMaterial(material)
+	{
+	}
 
+	SphereRenderer::SphereRenderer(const std::string& material) :
+		Renderable(&typeid(SphereRenderer)),
+		mMaterial(ngResourceMgr.getMaterial(material))
+	{
+	}
 
+	SphereRenderer::~SphereRenderer()
+	{
+	}
+
+	void SphereRenderer::_extractDrawCalls(std::vector<DrawCall>& cachedDrawCallList, const Camera& camera)
+	{
+		// Calculate the depth of the object in the scene for sorting
+		SceneNode* parent = getParent();
+		uint32 depth = 0;
+		if (parent)
+		{
+			// Get the global position of the 
+			const glm::vec3& position = parent->getGlobalPosition();
+			const glm::vec3& camPos = camera.getParent()->getGlobalPosition();
+			float n = camera.getNearClip();
+			float f = camera.getFarClip();
+			float depthNormalized = glm::length(position - camPos) / (f - n);
+			depth = uint32(double(depthNormalized) * 0x0fffff);
+		}
+
+		// If theres no material, dont make the draw call
+		if (mMaterial)
+		{
+			DrawCall drawCall;
+
+			drawCall.glMesh = ngResourceMgr.getBasicGeometry().mSphereMesh;
+			drawCall.indexType = GL_UNSIGNED_SHORT;
+			drawCall.drawMode = GL_TRIANGLES;
+			drawCall.count = ngResourceMgr.getBasicGeometry().mSphereIndices;
+			drawCall.offset = 0;
+
+			// Hacky submesh ID
+			uint16 subMeshID = 0;
+
+			// Needs parent for transform matrix
+			drawCall.parent = parent;
+			drawCall.material = mMaterial;
+
+			drawCall.sortKey.key = mMaterial->_generateSortKey(depth, subMeshID).key;
+			cachedDrawCallList.push_back(drawCall);
+		}
+	}
 }

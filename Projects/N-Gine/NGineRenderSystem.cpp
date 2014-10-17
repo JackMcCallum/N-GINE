@@ -433,7 +433,7 @@ namespace NGine
 				glDisable(GL_CULL_FACE);
 		}
 
-		if (mBlendEnabled && mCullface != face)
+		if (mCullface != face)
 		{
 			mCullface = face;
 			glCullFace(face);

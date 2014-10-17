@@ -12,7 +12,7 @@ namespace NGine
 	class ImageFile;
 
 	RESOURCE_PTR(Texture);
-	class Texture final : public Resource
+	class Texture final : public Resource, public TPoolAllocator<Texture>
 	{
 		friend class ResourceManager;
 	private:

@@ -3,13 +3,14 @@
 
 #include "NGineCommon.h"
 #include "NGineRenderThread.h"
+#include "NGineFixedSizeAllocator.h"
 
 namespace NGine
 {
 	class RenderSystem;
 
 	class GLMesh;
-	class GLBuffer
+	class GLBuffer final : public TPoolAllocator<GLBuffer>
 	{
 		friend class RenderSystem;
 		friend class GLMesh;

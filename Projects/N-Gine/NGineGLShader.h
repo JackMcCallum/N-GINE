@@ -8,7 +8,7 @@ namespace NGine
 {
 	class RenderSystem;
 
-	class GLShader
+	class GLShader final : public TPoolAllocator<GLShader>
 	{
 		friend class RenderSystem;
 

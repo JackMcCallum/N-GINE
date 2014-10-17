@@ -12,7 +12,7 @@ namespace NGine
 	class RenderSystem;
 	class GLFrameBuffer;
 
-	class GLTexture2D : public GLTexture
+	class GLTexture2D : public GLTexture, public TPoolAllocator<GLTexture2D>
 	{
 		friend class RenderSystem;
 		friend class GLFrameBuffer;

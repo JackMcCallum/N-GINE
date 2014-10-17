@@ -4,9 +4,9 @@
 
 namespace NGine
 {
-	TPoolAllocator<uint32, 256>& getResourceHandleRefAlloc()
+	TFixedTypeAllocator<uint32, 256>& getResourceHandleRefAlloc()
 	{
-		static TPoolAllocator<uint32, 256> allocator;
+		static TFixedTypeAllocator<uint32, 256> allocator;
 		return allocator;
 	}
 

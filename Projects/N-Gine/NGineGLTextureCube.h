@@ -6,7 +6,7 @@
 
 namespace NGine
 {
-	class GLTextureCube : public GLTexture
+	class GLTextureCube : public GLTexture, public TPoolAllocator<GLTextureCube>
 	{
 		friend class RenderSystem;
 		friend class GLFrameBuffer;

@@ -8,7 +8,7 @@
 
 namespace NGine
 {
-	TPoolAllocator<uint32, 256>& getResourceHandleRefAlloc();
+	TFixedTypeAllocator<uint32, 256>& getResourceHandleRefAlloc();
 
 	template<typename T>
 	class TResourceHandle

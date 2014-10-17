@@ -8,29 +8,23 @@
 //#pragma comment(lib, "C:/Program Files (x86)/Visual Leak Detector/lib/Win32/vld.lib")
 //#include "C:/Program Files (x86)/Visual Leak Detector/include/vld.h"
 
-size_t threadId;
-unsigned int a = 0;
+#include "NGineFixedSizeAllocator.h"
 
-void threadMain()
+using namespace NGine;
+
+
+
+class TestObject : public TPoolAllocator<TestObject>
 {
-	for (int i = 0; i < 100000; i++)
-	{
-		if (4 != threadId)
-			a++;
-	}
-}
+public:
+
+	char padding[64];
+};
 
 int main()
 {
-	threadId = std::this_thread::get_id().hash();
-
-	int b = clock();
-
-	std::thread thread(&threadMain);
-	thread.join();
-
-	std::cout << clock() - b << std::endl;
-
+	TestObject* obj = new TestObject();
+	delete obj;
 
 	system("pause");
 	return 0;

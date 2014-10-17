@@ -9,7 +9,7 @@ namespace NGine
 {
 	class RenderSystem;
 
-	class GLMesh
+	class GLMesh final : public TPoolAllocator<GLMesh>
 	{
 		friend class RenderSystem;
 

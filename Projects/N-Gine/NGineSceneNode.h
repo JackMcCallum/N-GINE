@@ -3,6 +3,7 @@
 
 #include "NGineCommon.h"
 #include "NGineAABB.h"
+#include "NGineFixedSizeAllocator.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
@@ -19,7 +20,7 @@ namespace NGine
 		PARENT,
 	};
 
-	class SceneNode
+	class SceneNode : public TPoolAllocator<SceneNode>
 	{
 	public:
 		friend class Component;

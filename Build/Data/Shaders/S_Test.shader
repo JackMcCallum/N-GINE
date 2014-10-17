@@ -50,13 +50,13 @@ void main()
 	//float S = max(dot(vNormal, normalize(vec3(1,1,1))) * 0.8 + 0.2, 0) + 0.5;
 	
 	
-	vec4 samp = texture(uTexUnit0, vTexCoord0 * 20);
-	vec4 samp2 = texture(uTexUnit1, vTexCoord0) * 0.7;
+	vec4 samp = texture(uTexUnit0, vTexCoord0 * 10);
+	vec4 samp2 = texture(uTexUnit1, vTexCoord0 * 20) * 0.7;
 	
 	oColor0 = vec4(samp2.xyz, 1) * uMaterialDiffuse;
 	oColor1 = vec4(vNormal, 1);
 	oColor2 = vec4(uMaterialEmissive);
-	oColor3 = vec4(samp2.a * samp.x * 0.8 + 0.4, samp2.a * samp.x * 0.8 + 0.4, 1, 1);
+	oColor3 = vec4(0.1, 0.1 + samp2.x * 0.2 + samp.x * 0.4, 1, 1);
 	
 }
 

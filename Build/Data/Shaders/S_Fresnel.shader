@@ -44,7 +44,7 @@ out vec4 oColor0;
 
 void main()
 {
-	float S = pow(1 - max(dot(vNormal, normalize(uCameraMatrix[3].xyz-vPosition)) - 0.3, 0), 8);
+	float S = 1-pow(1 - max(dot(vNormal, normalize(uCameraMatrix[3].xyz-vPosition)), 0), 3);
 	
 	oColor0 = mix(uMaterialDiffuse, vec4(0), 1-S);
 }

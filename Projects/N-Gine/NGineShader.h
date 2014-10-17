@@ -10,7 +10,7 @@ namespace NGine
 	class ShaderFile;
 	
 	RESOURCE_PTR(Shader);
-	class Shader final : public Resource
+	class Shader final : public Resource, public TPoolAllocator<Shader>
 	{
 		friend class ResourceManager;
 	private:

@@ -32,8 +32,7 @@ float rand(vec2 co)
 
 void main()
 {
-	oColor0 = texture(uTexUnit0, vTexCoord) + vec4(rand(vTexCoord) / 255.0f);
-	oColor0 *= oColor0;
+	oColor0 = (texture(uTexUnit0, vTexCoord) + vec4(rand(vTexCoord) / 255.0f)) ;
 }
 
 

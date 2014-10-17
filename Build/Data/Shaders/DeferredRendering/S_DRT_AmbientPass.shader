@@ -33,9 +33,9 @@ void main()
 	vec4 NormalSamp = texture(uTexUnit1, vTexCoord);
 	vec4 EmissSamp = texture(uTexUnit2, vTexCoord);
 	
-	vec3 ambientColor = mix(vec3(0.1), vec3(0.3), NormalSamp.y * 0.5 + 0.5);
+	vec3 ambientColor = mix(vec3(0.1), vec3(0.2), NormalSamp.y * 0.5 + 0.5);
 	
-	oColor0 = vec4(ambientColor, 1) * AlbedoSamp + EmissSamp;
+	oColor0 = vec4(ambientColor, 1) * AlbedoSamp * AlbedoSamp.w + EmissSamp;
 }
 
 
