@@ -50,6 +50,10 @@ namespace NGine
 
 		const BasicGeometry& getBasicGeometry();
 
+		void renderQuad(uint32 num = 1);
+		void renderCube(uint32 num = 1);
+		void renderSphere(uint32 num = 1);
+
 	private:
 		void _setupBasicPrimitiveGeometry();
 
