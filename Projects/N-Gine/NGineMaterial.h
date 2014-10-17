@@ -9,7 +9,7 @@ namespace NGine
 {
 	class ResourceManager;
 
-	class Material final : public Resource
+	class Material final : public Resource, public TPoolAllocator<Material>
 	{
 		friend class ResourceManager;
 	private:
@@ -40,7 +40,7 @@ namespace NGine
 
 		// Sets all the contents of this material active in the render system
 		// Don't call this unless you know well how N-GINE works
-		void _setActive();
+		void setActive();
 
 		Renderable::DrawCall::SortKey _generateSortKey(uint32 depth24, uint32 submeshID, RenderLayer forceLayer = (RenderLayer)-1);
 

@@ -8,7 +8,13 @@ namespace NGine
 	class Light : public Renderable
 	{
 	public:
-		Light(const std::type_info* typeId);
+		enum Type
+		{
+			POINT,
+			DIRECTIONAL,
+		};
+
+		Light(const std::type_info* typeId, Type type);
 		~Light();
 		
 		void setColor(const glm::vec3& color);
@@ -16,11 +22,14 @@ namespace NGine
 
 		virtual void _extractDrawCalls(std::vector<DrawCall>& cachedDrawCallList, const Camera& camera) {}
 
+		inline Type getType() const { return mType; }
+
 	private:
 		glm::vec3 mColor;
+		Type mType;
 	};
 
-	class DirectionalLight : public Light
+	class DirectionalLight : public Light, public TPoolAllocator<DirectionalLight>
 	{
 	public:
 		DirectionalLight(const glm::vec3& direction);
@@ -34,10 +43,10 @@ namespace NGine
 		glm::vec3 mDirection;
 	};
 
-	class PointLight : public Light
+	class PointLight : public Light, public TPoolAllocator<PointLight>
 	{
 	public:
-		PointLight();
+		PointLight(float attenuation = 16);
 		~PointLight();
 
 		void setPosition(const glm::vec3& position);

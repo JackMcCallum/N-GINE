@@ -1,6 +1,7 @@
 #include "NGineStable.h"
 #include "NGineRenderTarget.h"
 #include "NGineRenderSystem.h"
+#include "NGineResourceManager.h"
 #include "NGineCamera.h"
 #include "NGineSceneNode.h"
 #include "NGineComponent.h"
@@ -41,13 +42,6 @@ namespace NGine
 	void RenderTarget::setCamera(Camera* camera)
 	{
 		mCamera = camera;
-	}
-
-	void RenderTarget::renderQuad(MaterialPtr material)
-	{
-		assert(material);
-		setActive();
-		ngRenderSys.renderQuad(material);
 	}
 
 	bool RenderTarget::_readyDrawCalls()
@@ -134,7 +128,7 @@ namespace NGine
 				{
 					lastMaterial = batchedDrawCall.material;
 					if (batchedDrawCall.material)
-						batchedDrawCall.material->_setActive();
+						batchedDrawCall.material->setActive();
 				}
 
 				// Make the draw call

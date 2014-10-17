@@ -42,7 +42,7 @@ namespace NGine
 		mShader = ngResourceMgr.getShader(name);
 	}
 
-	void Material::_setActive()
+	void Material::setActive()
 	{
 		RenderSystem& rs = Main::getRenderSystem();
 		if (mShader)

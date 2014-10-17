@@ -112,8 +112,6 @@ namespace NGine
 		virtual void onThreadStart();
 		virtual void onThreadEnd();
 
-
-
 		void setCameraMatrices(const glm::mat4& proj, const glm::mat4& view, const glm::mat4& cam);
 		void setWorldMatrix(const glm::mat4& world, uint32 offset);
 		void setWorldMatrices(MemoryBlock& matrices, uint32 count, uint32 offset);

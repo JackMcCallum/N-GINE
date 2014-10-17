@@ -1,6 +1,7 @@
 #ifndef __NGINE_DEFERRED_RENDER_TARGET_H_
 #define __NGINE_DEFERRED_RENDER_TARGET_H_
 
+#include "NGineCommon.h"
 #include "NGineRenderTarget.h"
 #include "NGineResource.h"
 #include "NGineGLFrameBuffer.h"
@@ -40,7 +41,7 @@ namespace NGine
 		MaterialPtr mMatDirLight;
 		MaterialPtr mMatPointLight;
 
-		
+		std::vector<Light*> mCachedLightList;
 
 	};
 }

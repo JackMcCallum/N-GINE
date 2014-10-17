@@ -32,12 +32,10 @@ namespace NGine
 
 		void setCamera(Camera* camera);
 
-		void renderQuad(MaterialPtr material);
-
-	protected:
 		// Set this as the active render target for the render system
 		virtual void setActive() = 0;
 
+	protected:
 		bool _readyDrawCalls();
 		void _iterateDrawcalls(DrawCallIterator start, DrawCallIterator end);
 

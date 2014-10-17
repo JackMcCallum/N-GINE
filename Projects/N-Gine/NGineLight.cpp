@@ -4,9 +4,10 @@
 namespace NGine
 {
 
-	Light::Light(const std::type_info* typeId) :
+	Light::Light(const std::type_info* typeId, Type type) :
 		Renderable(typeId),
-		mColor(1, 1, 1) // White by default
+		mColor(1, 1, 1),
+		mType(type)
 	{
 	}
 
@@ -25,12 +26,12 @@ namespace NGine
 	}
 
 	DirectionalLight::DirectionalLight() : 
-		Light(&typeid(DirectionalLight))
+		Light(&typeid(Light), Light::DIRECTIONAL)
 	{
 	}
 
 	DirectionalLight::DirectionalLight(const glm::vec3& direction) :
-		Light(&typeid(DirectionalLight))
+		Light(&typeid(Light), Light::DIRECTIONAL)
 	{
 		setDirection(direction);
 	}
@@ -49,8 +50,9 @@ namespace NGine
 		return mDirection;
 	}
 
-	PointLight::PointLight() :
-		Light(&typeid(PointLight))
+	PointLight::PointLight(float attenuation) :
+		Light(&typeid(Light), Light::POINT),
+		mAttenuation(attenuation)
 	{
 	}
 

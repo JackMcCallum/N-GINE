@@ -7,8 +7,8 @@
 #include <gl/GL.h>
 #include <Xinput/XInput.h>
 
-#pragma comment(lib, "C:/Program Files (x86)/Visual Leak Detector/lib/Win32/vld.lib")
-#include "C:/Program Files (x86)/Visual Leak Detector/include/vld.h"
+//#pragma comment(lib, "C:/Program Files (x86)/Visual Leak Detector/lib/Win32/vld.lib")
+//#include "C:/Program Files (x86)/Visual Leak Detector/include/vld.h"
 
 void Application::onCreate()
 {
@@ -24,10 +24,10 @@ void Application::onCreate()
 
 	// Load shaders
 	material = ngResourceMgr.createMaterial("JM_MatPrev_First");
-	material->setShader("S_Test.shader");
-	material->setDiffuse(glm::vec4(1,1,1, 0.5));
-	//material->setBlendMode(NGine::BM_ALPHA_BLEND);
-	//material->setDepthMode(true, false);
+	material->setShader("S_Fresnel.shader");
+	material->setDiffuse(glm::vec4(1,0.5,0.5, 0.5));
+	material->setBlendMode(NGine::BM_MODULATIVE);
+	material->setDepthMode(true, false);
 	material->setTexture("T_MacroVariation.tga", 0);
 	material->setTexture("T_Metal_Copper_D.tga", 1);
 	material->setTexture("T_Metal_Gold_N.tga", 2);
@@ -51,6 +51,7 @@ void Application::onCreate()
 
 	material = ngResourceMgr.createMaterial("WorldPosMaterial");
 	material->setShader("S_WorldPos.shader");
+	material->setCullMode(NGine::CM_DISABLED);
 
 
 	material = ngResourceMgr.createMaterial("TestMaterial");
@@ -74,6 +75,7 @@ void Application::onCreate()
 	//NGine::DirectionalLight* dirLight = new NGine::DirectionalLight(glm::vec3(-1));
 	//dirLight->setColor(glm::vec3(0.4, 0.4, 0.4) * 2.0f);
 	//mRootNode->attachComponent(dirLight);
+	mRootNode->attachComponent(new NGine::PointLight());
 
 	mCamera = new NGine::Camera();
 	mCamera->setProjection(60, 1280.0f / 720.0f, 0.01f, 256);
@@ -92,8 +94,9 @@ void Application::onCreate()
 	material->setDiffuse(glm::vec4(1, 1, 1, 0.5));
 	//material->setBlendMode(NGine::BM_ALPHA_BLEND);
 	//material->setDepthMode(true, false);
-	material->setTexture("../Data/Textures/T_MacroVariation.tga", 0);
-	material->setTexture("T_Level_AOBake.png", 1);
+	material->setTexture("T_MacroVariation.tga", 0);
+	material->setTexture("T_Metal_Copper_D.tga", 1);
+	material->setTexture("T_Metal_Gold_N.tga", 2);
 	material->setTexture("T_Metal_Gold_N.tga", 2);
 	tmpNode = mRootNode->createChild("Level");
 	tmpNode->attachComponent(new NGine::MeshRenderer("M_Level_Test.obj", "FrontCol"));
@@ -102,13 +105,45 @@ void Application::onCreate()
 	mSecondCamera = new NGine::Camera();
 	mSecondCamera->setProjection(60, 1280.0f / 720.0f, 0.01f, 256);
 
-	//for (int i = 0; i < 5000; i++)
-	//{
-	//	mTestNode = mRootNode->createChild("GizmosNode");
-	//	mMeshRenderer = new NGine::MeshRenderer("JC_Throne.obj");
-	//	mTestNode->attachComponent(mMeshRenderer);
-	//	mTestNode->setPosition(glm::vec3((rand() % 1000 - 500) / 10.0f, 0, (rand() % 1000 - 500) / 10.0f));
-	//}
+
+	int s = 10;
+	mGizmos->addLine(glm::vec3(0), glm::vec3(0, 1, 0), glm::vec3(0.4, 1, 0.4));
+	for (int i = -s; i <= s; i++)
+	{
+		if (i == 0)
+		{
+			mGizmos->addLine(glm::vec3(-s, 0, i), glm::vec3(s, 0, i), glm::vec3(1, 0.4, 0.4));
+			mGizmos->addLine(glm::vec3(i, 0, -s), glm::vec3(i, 0, s), glm::vec3(0.4, 0.4, 1));
+		}
+		else
+		{
+			mGizmos->addLine(glm::vec3(-s, 0, i), glm::vec3(s, 0, i), glm::vec3(0.4, 0.4, 0.4));
+			mGizmos->addLine(glm::vec3(i, 0, -s), glm::vec3(i, 0, s), glm::vec3(0.4, 0.4, 0.4));
+		}
+	}
+
+
+	for (int i = 0; i < 20; i++)
+	{
+		mTestNode = mRootNode->createChild("GizmosNode");
+		mTestNode->setPosition(glm::vec3((rand() % 1000 - 500) / 30.0f, (rand() % 1000 - 500) / 100.0f, (rand() % 1000 - 500) / 30.0f));
+
+		if (rand()%3 != 0)
+		{
+			NGine::PointLight* light = new NGine::PointLight(5);
+			light->setColor(glm::vec3((rand() % 1000) / 1000.0f, (rand() % 1000) / 1000.0f, (rand() % 1000) / 1000.0f) * 2.0f);
+			mTestNode->attachComponent(light);
+			mTestNode->attachComponent(new NGine::SphereRenderer("JM_MatPrev_Second"));
+			mTestNode->setScale(glm::vec3(0.1));
+			mGizmos->addSphere(mTestNode->getGlobalPosition(), light->getAttenuation(), light->getColor());
+		}
+		else
+		{
+			mMeshRenderer = new NGine::MeshRenderer("JM_MaterialPreview_01.obj");
+			mTestNode->attachComponent(mMeshRenderer);
+		}
+
+	}
 
 	mSecondCameraNode = mRootNode->createChild("");
 	mSecondCameraNode->attachComponent(mSecondCamera);
@@ -129,24 +164,6 @@ void Application::onUpdate()
 	cam->translate(mCamVelocity, NGine::Space::PARENT);
 	mCamVelocity *= 0.5f;
 
-	mGizmos->clear();
-	
-	int s = 10;
-	mGizmos->addLine(glm::vec3(0), glm::vec3(0, 1, 0), glm::vec3(0.4, 1, 0.4));
-	for (int i = -s; i <= s; i++)
-	{
-		if (i == 0)
-		{
-			mGizmos->addLine(glm::vec3(-s, 0, i), glm::vec3(s, 0, i), glm::vec3(1, 0.4, 0.4));
-			mGizmos->addLine(glm::vec3(i, 0, -s), glm::vec3(i, 0, s), glm::vec3(0.4, 0.4, 1));
-		}
-		else
-		{
-			mGizmos->addLine(glm::vec3(-s, 0, i), glm::vec3(s, 0, i), glm::vec3(0.4, 0.4, 0.4));
-			mGizmos->addLine(glm::vec3(i, 0, -s), glm::vec3(i, 0, s), glm::vec3(0.4, 0.4, 0.4));
-		}
-	}
-
 	//mRootNode->recursivly([this](NGine::SceneNode* node)
 	//{
 	//	if (node != mRootNode)
@@ -163,10 +180,9 @@ void Application::onUpdate()
 	mDeferredRenderTarget->updateTarget();
 	//mRenderWindow->update();
 
-	mRenderWindow->renderQuad(ngResourceMgr.getMaterial("Default"));
-
-	ngRenderSys.setWorldMatrix(glm::mat4(), 0);
-	ngRenderSys.renderSphere(ngResourceMgr.getMaterial("WorldPosMaterial"));
+	mRenderWindow->setActive();
+	ngResourceMgr.getMaterial("Default")->setActive();
+	ngResourceMgr.renderQuad();
 
 
 	mPrevState = mState;
@@ -245,7 +261,7 @@ int Application::run()
 
 	NGine::ConsoleLogger logger;
 
-	mRenderWindow = new NGine::SDLRenderWindow(1280, 720, false , 0);
+	mRenderWindow = new NGine::SDLRenderWindow(1280, 720, true , 0);
 	NGine::Main* main = new NGine::Main(mRenderWindow);
 	main->initialize();
 	main->getResourceManager().addResourceLocation("../Data");

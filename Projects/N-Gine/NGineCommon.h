@@ -64,6 +64,9 @@ namespace NGine
 	class MeshRenderer;
 	class Camera;
 	class Gizmos;
+	class Light;
+	class DirectionalLight;
+	class PointLight;
 
 	class GLBuffer;
 	class GLMesh;

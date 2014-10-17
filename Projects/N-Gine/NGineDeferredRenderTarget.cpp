@@ -78,9 +78,10 @@ namespace NGine
 		mMatPointLight->setTexture(mAlbedoAO, 0);
 		mMatPointLight->setTexture(mNormal, 1);
 		mMatPointLight->setTexture(mSurface, 3);
+		mMatPointLight->setTexture(mDepth24, 5);
 		mMatPointLight->setDepthMode(false, false);
 		mMatPointLight->setBlendMode(BM_ADDITIVE);
-
+		mMatPointLight->setCullMode(CM_FRONT);
 	}
 
 	DeferredRenderTarget::~DeferredRenderTarget()
@@ -110,8 +111,9 @@ namespace NGine
 		_iterateDrawcalls(mCachedDrawCallList.begin(), transparentStart);
 
 		ngRenderSys.bindFrameBuffer(mHDRBuffer);
-		ngRenderSys.renderQuad(mMatAmbientPass);
-
+		mMatAmbientPass->setActive();
+		ngResourceMgr.renderQuad();
+		
 		// Find the iterator to the first transparent draw call, we dont want to include them in the GBuffer
 		auto guiStart = std::find_if(mCachedDrawCallList.begin(), mCachedDrawCallList.end(),
 			[](const Renderable::DrawCall& drawCall)
@@ -129,24 +131,59 @@ namespace NGine
 		//_postProcess();
 
 		// Draw the GUI
-		//_iterateDrawcalls(guiStart, mCachedDrawCallList.end());
+		_iterateDrawcalls(guiStart, mCachedDrawCallList.end());
 	}
 
 	void DeferredRenderTarget::_lightPass()
 	{
+		mCachedLightList.clear();
 		for (auto iter : mCachedRenderableList)
 		{
-			if (iter->getTypeInfo() == &typeid(PointLight))
-			{
+			if (iter->getTypeInfo() == &typeid(Light))
+				mCachedLightList.push_back((Light*)iter);
+		}
 
-			}
-			else if (iter->getTypeInfo() == &typeid(DirectionalLight))
+		MaterialPtr lastMat;
+		for (auto iter : mCachedLightList)
+		{
+			DirectionalLight* dlight;
+			PointLight* plight;
+
+			switch (iter->getType())
 			{
-				DirectionalLight* light = (DirectionalLight*)iter;
-				ngRenderSys.setCustomParams(glm::vec4(light->getDirection(), 1), glm::vec4(light->getColor(), 1));
-				ngRenderSys.renderQuad(mMatDirLight);
+			case Light::DIRECTIONAL:
+
+				dlight = (DirectionalLight*)iter;
+				ngRenderSys.setCustomParams(glm::vec4(dlight->getDirection(), 1), glm::vec4(dlight->getColor(), 1));
+				if (lastMat != mMatDirLight)
+				{
+					lastMat = mMatDirLight;
+					mMatDirLight->setActive();
+				}
+				ngResourceMgr.renderQuad();
+
+				break;
+			case Light::POINT:
+
+				plight = (PointLight*)iter;
+				float atten = plight->getAttenuation();
+				const glm::vec3 pos = plight->getParent()->getGlobalPosition();
+				glm::mat4 mat(atten, 0, 0, 0, 0, atten, 0, 0, 0, 0, atten, 0, pos.x, pos.y, pos.z, 1);
+				ngRenderSys.setCustomParams(glm::vec4(pos, atten), glm::vec4(plight->getColor(), 1));
+				ngRenderSys.setWorldMatrix(mat, 0);
+				if (lastMat != mMatPointLight)
+				{
+					lastMat = mMatPointLight;
+					mMatPointLight->setActive();
+				}
+				ngResourceMgr.renderSphere();
+
+
+
+				break;
 			}
 		}
+
 	}
 
 	void DeferredRenderTarget::_postProcess()

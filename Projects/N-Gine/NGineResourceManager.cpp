@@ -328,7 +328,7 @@ namespace NGine
 
 		uint16 quadInds[] =
 		{
-			1, 0, 2, 3, 1, 2,
+			0, 1, 2, 1, 3, 2,
 		};
 		mBasicGeometry.mQuadIndices = sizeof(quadInds) / sizeof(uint16);
 
@@ -357,36 +357,36 @@ namespace NGine
 		mBasicGeometry.mCubeIndices = sizeof(cubeInds) / sizeof(uint16);
 
 		const uint32 segments = 24;
-		const uint32 rings = 16;
-		glm::vec3 sphereVerts[segments*(rings + 1)];
-		uint16 sphereInds[segments*(rings + 1) * 6];
-		mBasicGeometry.mSphereIndices = segments*(rings + 1) * 6;
-
+		const uint32 rings = 12;
+		glm::vec3 sphereVerts[segments*rings];
+		uint16 sphereInds[segments*rings * 6];
+		
+		for (uint32 y = 0; y < rings; y++)
 		for (uint32 x = 0; x < segments; x++)
-		for (uint32 y = 0; y < (rings + 1); y++)
 		{
 			const float pi = glm::pi<float>();
 			const float s = (float)segments;
-			const float r = (float)rings;
-		
+			const float r = (float)rings-1;
+
 			sphereVerts[y * segments + x] = glm::vec3(
 				glm::sin((x / s) * pi * 2) * glm::sin((y / r) * pi),
 				-glm::cos((y / r) * pi),
 				glm::cos((x / s) * pi * 2) * glm::sin((y / r) * pi));
 		}
 
-#define offset(xx, yy) ((y+yy) * segments + (x+xx >= segments ? 0 : x+xx))
+#define offset(xx, yy) ((y+yy) * segments + ((x+xx) >= segments ? 0 : x+xx))
+		uint32 inds = 0;
+		for (uint32 y = 0; y < rings - 1; y++)
 		for (uint32 x = 0; x < segments; x++)
-		for (uint32 y = 0; y < rings; y++)
 		{
-			uint32 i = y * 6 * segments + x * 6;
-			sphereInds[i + 0] = offset(0, 0);
-			sphereInds[i + 1] = offset(1, 0);
-			sphereInds[i + 2] = offset(0, 1);
-			sphereInds[i + 3] = offset(1, 0);
-			sphereInds[i + 4] = offset(1, 1);
-			sphereInds[i + 5] = offset(0, 1);
+			sphereInds[inds++] = offset(0, 0);
+			sphereInds[inds++] = offset(1, 0);
+			sphereInds[inds++] = offset(0, 1);
+			sphereInds[inds++] = offset(1, 0);
+			sphereInds[inds++] = offset(1, 1);
+			sphereInds[inds++] = offset(0, 1);
 		}
+		mBasicGeometry.mSphereIndices = inds;
 #undef offset
 
 
@@ -404,10 +404,10 @@ namespace NGine
 		mBasicGeometry.mQuadMesh->getVertexBuffer().unlock();
 
 		// Upload indices
-		mBasicGeometry.mQuadMesh->getVertexBuffer().resize(sizeof(quadInds), BU_STATIC);
-		data = mBasicGeometry.mQuadMesh->getVertexBuffer().lock();
+		mBasicGeometry.mQuadMesh->getIndexBuffer().resize(sizeof(quadInds), BU_STATIC);
+		data = mBasicGeometry.mQuadMesh->getIndexBuffer().lock();
 		memcpy(data, quadInds, sizeof(quadInds));
-		mBasicGeometry.mQuadMesh->getVertexBuffer().unlock();
+		mBasicGeometry.mQuadMesh->getIndexBuffer().unlock();
 
 		// =====================================
 		mBasicGeometry.mCubeMesh = new GLMesh();
@@ -450,6 +450,21 @@ namespace NGine
 	const ResourceManager::BasicGeometry& ResourceManager::getBasicGeometry()
 	{
 		return mBasicGeometry;
+	}
+
+	void ResourceManager::renderQuad(uint32 num)
+	{
+		mBasicGeometry.mQuadMesh->draw(GL_TRIANGLES, GL_UNSIGNED_SHORT, 0, mBasicGeometry.mQuadIndices, num);
+	}
+
+	void ResourceManager::renderCube(uint32 num)
+	{
+		mBasicGeometry.mCubeMesh->draw(GL_TRIANGLES, GL_UNSIGNED_SHORT, 0, mBasicGeometry.mCubeIndices, num);
+	}
+
+	void ResourceManager::renderSphere(uint32 num)
+	{
+		mBasicGeometry.mSphereMesh->draw(GL_TRIANGLES, GL_UNSIGNED_SHORT, 0, mBasicGeometry.mSphereIndices, num);
 	}
 
 }
