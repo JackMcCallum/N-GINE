@@ -133,4 +133,9 @@ namespace NGine
 		return GL_STATIC_DRAW;
 	}
 
+	size_t GLBuffer::getSize()
+	{
+		return mSize;
+	}
+
 }

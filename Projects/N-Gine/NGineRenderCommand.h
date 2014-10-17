@@ -10,14 +10,6 @@
 
 namespace NGine
 {
-	//class RenderCommand
-	//{
-	//public:
-	//	virtual ~RenderCommand() {};
-	//	virtual void execute() = 0;
-	//};
-
-
 	// Enqueue a render command with 0 parameters
 #define ENQUEUE_RENDER_COMMAND_0PARAMS(typeName, code) \
 	{ \

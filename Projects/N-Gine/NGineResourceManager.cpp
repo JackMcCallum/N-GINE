@@ -4,6 +4,7 @@
 #include "NGineShader.h"
 #include "NGineMaterial.h"
 #include "NGineTexture.h"
+#include "NGineGLMesh.h"
 
 namespace NGine
 {
@@ -11,7 +12,8 @@ namespace NGine
 
 	ResourceManager::ResourceManager()
 	{
-
+		memset(&mBasicGeometry, 0, sizeof(mBasicGeometry));
+		_setupBasicPrimitiveGeometry();
 	}
 
 	ResourceManager::~ResourceManager()
@@ -30,6 +32,10 @@ namespace NGine
 
 		for (auto iter : mResourceDirectories)
 			delete iter;
+
+		delete mBasicGeometry.mQuadMesh;
+		delete mBasicGeometry.mCubeMesh;
+		delete mBasicGeometry.mSphereMesh;
 	}
 
 	bool ResourceManager::addResourceLocation(const std::string& location)
@@ -310,6 +316,140 @@ namespace NGine
 	{
 		mDefaultTexture = getTexture(name);
 	}
+	void ResourceManager::_setupBasicPrimitiveGeometry()
+	{
+		glm::vec3 quadVerts[] =
+		{
+			glm::vec3(-1, -1, 0),
+			glm::vec3(1, -1, 0),
+			glm::vec3(-1, 1, 0),
+			glm::vec3(1, 1, 0),
+		};
 
+		uint16 quadInds[] =
+		{
+			1, 0, 2, 3, 1, 2,
+		};
+		mBasicGeometry.mQuadIndices = sizeof(quadInds) / sizeof(uint16);
+
+
+		glm::vec3 cubeVerts[] =
+		{
+			glm::vec3(-1, -1, -1),
+			glm::vec3(1, -1, -1),
+			glm::vec3(-1, 1, -1),
+			glm::vec3(1, 1, -1),
+			glm::vec3(-1, -1, 1),
+			glm::vec3(1, -1, 1),
+			glm::vec3(-1, 1, 1),
+			glm::vec3(1, 1, 1),
+		};
+
+		uint16 cubeInds[] =
+		{
+			1, 3, 5, 3, 7, 5, // +X
+			2, 0, 4, 6, 2, 4, // -X
+			3, 2, 6, 7, 3, 6, // +Y
+			0, 1, 4, 1, 5, 4, // -Y
+			4, 5, 6, 5, 7, 6, // +Z
+			1, 0, 2, 3, 1, 2, // -Z
+		};
+		mBasicGeometry.mCubeIndices = sizeof(cubeInds) / sizeof(uint16);
+
+		const uint32 segments = 24;
+		const uint32 rings = 16;
+		glm::vec3 sphereVerts[segments*(rings + 1)];
+		uint16 sphereInds[segments*(rings + 1) * 6];
+		mBasicGeometry.mSphereIndices = segments*(rings + 1) * 6;
+
+		for (uint32 x = 0; x < segments; x++)
+		for (uint32 y = 0; y < (rings + 1); y++)
+		{
+			const float pi = glm::pi<float>();
+			const float s = (float)segments;
+			const float r = (float)rings;
+		
+			sphereVerts[y * segments + x] = glm::vec3(
+				glm::sin((x / s) * pi * 2) * glm::sin((y / r) * pi),
+				-glm::cos((y / r) * pi),
+				glm::cos((x / s) * pi * 2) * glm::sin((y / r) * pi));
+		}
+
+#define offset(xx, yy) ((y+yy) * segments + (x+xx >= segments ? 0 : x+xx))
+		for (uint32 x = 0; x < segments; x++)
+		for (uint32 y = 0; y < rings; y++)
+		{
+			uint32 i = y * 6 * segments + x * 6;
+			sphereInds[i + 0] = offset(0, 0);
+			sphereInds[i + 1] = offset(1, 0);
+			sphereInds[i + 2] = offset(0, 1);
+			sphereInds[i + 3] = offset(1, 0);
+			sphereInds[i + 4] = offset(1, 1);
+			sphereInds[i + 5] = offset(0, 1);
+		}
+#undef offset
+
+
+		void* data;
+
+		// =====================================
+		mBasicGeometry.mQuadMesh = new GLMesh();
+		mBasicGeometry.mQuadMesh->setAttribute(Semantic::SM_POSITION, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
+		mBasicGeometry.mQuadMesh->setAttribute(Semantic::SM_NORMAL, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
+
+		// Upload vertices
+		mBasicGeometry.mQuadMesh->getVertexBuffer().resize(sizeof(quadVerts), BU_STATIC);
+		data = mBasicGeometry.mQuadMesh->getVertexBuffer().lock();
+		memcpy(data, quadVerts, sizeof(quadVerts));
+		mBasicGeometry.mQuadMesh->getVertexBuffer().unlock();
+
+		// Upload indices
+		mBasicGeometry.mQuadMesh->getVertexBuffer().resize(sizeof(quadInds), BU_STATIC);
+		data = mBasicGeometry.mQuadMesh->getVertexBuffer().lock();
+		memcpy(data, quadInds, sizeof(quadInds));
+		mBasicGeometry.mQuadMesh->getVertexBuffer().unlock();
+
+		// =====================================
+		mBasicGeometry.mCubeMesh = new GLMesh();
+		mBasicGeometry.mCubeMesh->setAttribute(Semantic::SM_POSITION, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
+		mBasicGeometry.mCubeMesh->setAttribute(Semantic::SM_NORMAL, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
+
+		// Upload vertices
+		mBasicGeometry.mCubeMesh->getVertexBuffer().resize(sizeof(cubeVerts), BU_STATIC);
+		data = mBasicGeometry.mCubeMesh->getVertexBuffer().lock();
+		memcpy(data, cubeVerts, sizeof(cubeVerts));
+		mBasicGeometry.mCubeMesh->getVertexBuffer().unlock();
+
+		// Upload indices
+		mBasicGeometry.mCubeMesh->getIndexBuffer().resize(sizeof(cubeInds), BU_STATIC);
+		data = mBasicGeometry.mCubeMesh->getIndexBuffer().lock();
+		memcpy(data, cubeInds, sizeof(cubeInds));
+		mBasicGeometry.mCubeMesh->getIndexBuffer().unlock();
+
+		// =====================================
+		mBasicGeometry.mSphereMesh = new GLMesh();
+		mBasicGeometry.mSphereMesh->setAttribute(Semantic::SM_POSITION, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
+		mBasicGeometry.mSphereMesh->setAttribute(Semantic::SM_NORMAL, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
+
+		// Upload vertices
+		mBasicGeometry.mSphereMesh->getVertexBuffer().resize(sizeof(sphereVerts), BU_STATIC);
+		data = mBasicGeometry.mSphereMesh->getVertexBuffer().lock();
+		memcpy(data, sphereVerts, sizeof(sphereVerts));
+		mBasicGeometry.mSphereMesh->getVertexBuffer().unlock();
+
+		// Upload indices
+		mBasicGeometry.mSphereMesh->getIndexBuffer().resize(sizeof(sphereInds), BU_STATIC);
+		data = mBasicGeometry.mSphereMesh->getIndexBuffer().lock();
+		memcpy(data, sphereInds, sizeof(sphereInds));
+		mBasicGeometry.mSphereMesh->getIndexBuffer().unlock();
+
+
+
+	}
+
+	const ResourceManager::BasicGeometry& ResourceManager::getBasicGeometry()
+	{
+		return mBasicGeometry;
+	}
 
 }

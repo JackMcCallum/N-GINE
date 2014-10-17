@@ -24,6 +24,8 @@ namespace NGine
 
 		void resize(size_t size, BufferUsage usage);
 
+		size_t getSize();
+
 	private:
 		static GLenum _translateUseage(BufferUsage usage);
 		

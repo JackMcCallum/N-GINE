@@ -112,10 +112,7 @@ namespace NGine
 		virtual void onThreadStart();
 		virtual void onThreadEnd();
 
-		// Render a quad mesh
-		void renderQuad(MaterialPtr material);
-		void renderCube(MaterialPtr material);
-		void renderSphere(MaterialPtr material);
+
 
 		void setCameraMatrices(const glm::mat4& proj, const glm::mat4& view, const glm::mat4& cam);
 		void setWorldMatrix(const glm::mat4& world, uint32 offset);
@@ -163,7 +160,6 @@ namespace NGine
 
 	private:
 		void _queryForRenderSystemCapabilities();
-		void _setupBasicPrimitiveGeometry();
 
 	private:
 		RenderSystemCapabilities mCapabilities;
@@ -185,20 +181,6 @@ namespace NGine
 		GLenum mBlendDestFunc;
 		GLenum mBlendEquasion;
 
-		// Basic primitive geometry
-		uint32 mCubeVAO;
-		uint32 mCubeVBO;
-		uint32 mCubeIBO;
-		uint32 mCubeIndices;
-
-		uint32 mSphereVAO;
-		uint32 mSphereVBO;
-		uint32 mSphereIBO;
-		uint32 mSpereIndices;
-
-		GLMesh* mQuadMesh;
-		GLMesh* mCubeMesh;
-		GLMesh* mSphereMesh;
 
 	};
 }

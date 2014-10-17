@@ -81,14 +81,11 @@ namespace NGine
 		glBufferData(GL_UNIFORM_BUFFER, sizeof(GlobalUniforms), &mGlobalUniforms, GL_STREAM_DRAW);
 		glBindBufferRange(GL_UNIFORM_BUFFER, 0, mGlobalUniformBuffer, 0, sizeof(GlobalUniforms));
 
-		_setupBasicPrimitiveGeometry();
 	}
 
 	void RenderSystem::onThreadEnd()
 	{
 		assert(isRenderThread());
-
-		delete mQuadMesh;
 
 		glDeleteBuffers(1, &mGlobalUniformBuffer);
 	}
@@ -589,147 +586,6 @@ namespace NGine
 	const RenderSystemCapabilities& RenderSystem::getRenderSystemCapabilities()
 	{
 		return Main::getRenderSystem().mCapabilities;
-	}
-
-	void RenderSystem::renderQuad(MaterialPtr material)
-	{
-		if (material)
-		{
-			material->_setActive();
-			mQuadMesh->draw(GL_TRIANGLES, GL_BYTE, 0, 4);
-		}
-	}
-
-	void RenderSystem::renderCube(MaterialPtr material)
-	{
-		if (material)
-		{
-			material->_setActive();
-			ENQUEUE_RENDER_COMMAND_2PARAMS(Quad,
-				uint32, handle, mCubeVAO,
-				uint32, indices, mCubeIndices,
-				{
-				ngRenderSys._rtBindMesh(handle);
-				glDrawElements(GL_TRIANGLES, indices, GL_UNSIGNED_SHORT, nullptr);
-			});
-		}
-	}
-
-	void RenderSystem::renderSphere(MaterialPtr material)
-	{
-		if (material)
-		{
-			material->_setActive();
-			ENQUEUE_RENDER_COMMAND_2PARAMS(Quad,
-				uint32, handle, mSphereVAO,
-				uint32, indices, mSpereIndices,
-				{
-				ngRenderSys._rtBindMesh(handle);
-				glDrawElements(GL_TRIANGLES, indices, GL_UNSIGNED_SHORT, nullptr);
-			});
-		}
-	}
-
-	void RenderSystem::_setupBasicPrimitiveGeometry()
-	{
-		glm::vec3 quadGeom[] =
-		{
-			glm::vec3(-1, -1, 0),
-			glm::vec3(1, -1, 0),
-			glm::vec3(-1, 1, 0),
-			glm::vec3(1, 1, 0),
-		};
-
-		glm::vec3 cubeVerts[] =
-		{
-			glm::vec3(-1, -1, -1),
-			glm::vec3(1, -1, -1),
-			glm::vec3(-1, 1, -1),
-			glm::vec3(1, 1, -1),
-			glm::vec3(-1, -1, 1),
-			glm::vec3(1, -1, 1),
-			glm::vec3(-1, 1, 1),
-			glm::vec3(1, 1, 1),
-		};
-
-		// 0246 1357
-
-		uint16 cubeInds[] =
-		{
-			1, 3, 5, 3, 7, 5, // +X
-			2, 0, 4, 6, 2, 4, // -X
-			3, 2, 6, 7, 3, 6, // +Y
-			0, 1, 4, 1, 5, 4, // -Y
-			4, 5, 6, 5, 7, 6, // +Z
-			1, 0, 2, 3, 1, 2, // -Z
-		};
-		mCubeIndices = sizeof(cubeInds) / sizeof(uint16);
-
-
-#define offset(xx, yy) ((y+yy) * segments + (x+xx >= segments ? 0 : x+xx))
-
-		const uint32 segments = 24;
-		const uint32 rings = 16;
-		glm::vec3 sphereVerts[segments*(rings + 1)];
-		uint16 sphereInds[segments*(rings + 1) * 6];
-		mSpereIndices = segments*(rings + 1) * 6;
-
-		for (uint32 x = 0; x < segments; x++)
-		for (uint32 y = 0; y < (rings + 1); y++)
-		{
-			sphereVerts[y * segments + x] = glm::vec3(
-				glm::sin((x / float(segments)) * glm::pi<float>() * 2) * glm::sin((y / float(rings)) * glm::pi<float>()),
-				-glm::cos((y / float(rings)) * glm::pi<float>()),
-				glm::cos((x / float(segments)) * glm::pi<float>() * 2) * glm::sin((y / float(rings)) * glm::pi<float>()));
-		}
-
-		for (uint32 x = 0; x < segments; x++)
-		for (uint32 y = 0; y < rings; y++)
-		{
-			uint32 i = y * 6 * segments + x * 6;
-			sphereInds[i + 0] = offset(0, 0);
-			sphereInds[i + 1] = offset(1, 0);
-			sphereInds[i + 2] = offset(0, 1);
-			sphereInds[i + 3] = offset(1, 0);
-			sphereInds[i + 4] = offset(1, 1);
-			sphereInds[i + 5] = offset(0, 1);
-		}
-
-		mQuadMesh = new GLMesh();
-		mQuadMesh->getVertexBuffer().resize(sizeof(quadGeom), BU_STATIC);
-		void* data = mQuadMesh->getVertexBuffer().lock();
-		memcpy(data, quadGeom, sizeof(quadGeom));
-		mQuadMesh->getVertexBuffer().unlock();
-		mQuadMesh->setAttribute(Semantic::SM_POSITION, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
-		mQuadMesh->setAttribute(Semantic::SM_NORMAL, true, 3, GL_FLOAT, 0, sizeof(glm::vec3));
-
-		glGenVertexArrays(1, &mCubeVAO);
-		_rtBindMesh(mCubeVAO);
-		glGenBuffers(1, &mCubeVBO);
-		glGenBuffers(1, &mCubeIBO);
-		glBindBuffer(GL_ARRAY_BUFFER, mCubeVBO);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mCubeIBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVerts), cubeVerts, GL_STATIC_DRAW);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cubeInds), cubeInds, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(glm::vec3), 0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(glm::vec3), 0);
-
-		glGenVertexArrays(1, &mSphereVAO);
-		_rtBindMesh(mSphereVAO);
-		glGenBuffers(1, &mSphereVBO);
-		glGenBuffers(1, &mSphereIBO);
-		glBindBuffer(GL_ARRAY_BUFFER, mSphereVBO);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mSphereIBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(sphereVerts), sphereVerts, GL_STATIC_DRAW);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(sphereInds), sphereInds, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(glm::vec3), 0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(glm::vec3), 0);
-		_rtBindMesh(0);
-
 	}
 
 }

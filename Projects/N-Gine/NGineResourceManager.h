@@ -16,6 +16,7 @@ namespace NGine
 		ResourceManager();
 		~ResourceManager();
 
+		struct BasicGeometry;
 
 	public:
 		bool addResourceLocation(const std::string& location);
@@ -47,6 +48,11 @@ namespace NGine
 		void removeTexture(const std::string& name);
 		void removeTexture(TexturePtr handle);
 
+		const BasicGeometry& getBasicGeometry();
+
+	private:
+		void _setupBasicPrimitiveGeometry();
+
 	private:
 		std::vector<MeshPtr> mMeshList;
 		std::vector<ShaderPtr> mShaderList;
@@ -56,6 +62,19 @@ namespace NGine
 		std::vector<Directory*> mResourceDirectories;
 
 		TexturePtr mDefaultTexture;
+
+		struct BasicGeometry
+		{
+			// Basic primitive geometry
+			GLMesh* mQuadMesh;
+			uint32 mQuadIndices;
+			GLMesh* mCubeMesh;
+			uint32 mCubeIndices;
+			GLMesh* mSphereMesh;
+			uint32 mSphereIndices;
+		} mBasicGeometry;
+		
+
 	};
 }
 
